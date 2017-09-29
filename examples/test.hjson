@@ -1,0 +1,9 @@
+{
+# this file it intended for testing purposes. Do not change them
+"test":"./configuration/config.hjson"
+"section1":{
+"subsection2": {
+"value":1
+}
+}
+}

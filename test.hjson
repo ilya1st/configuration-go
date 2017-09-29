@@ -1,0 +1,4 @@
+{
+# this file it intended for testing purposes. Do not change them
+"CONFIG_FILE":"./configuration/config.hjson"
+}
