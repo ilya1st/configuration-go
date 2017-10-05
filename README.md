@@ -9,7 +9,7 @@ Library is intended to ease getting configuration file values if you know path t
 
 Make sure you have a working Go environment. See the [install instructions](http://golang.org/doc/install.html).
 
-$ go get -u github.com/Ilya1st/configuration-go
+$ go get -u github.com/ilya1st/configuration-go
 
 # Usage as command line tool
 
@@ -26,7 +26,7 @@ For example: we have file test.hjson
 package main
 import(
   "fmt"
-  "github.com/Ilya1st/configuration-go"
+  "github.com/ilya1st/configuration-go"
 )
 
 func main(){
