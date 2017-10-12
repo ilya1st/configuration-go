@@ -16,6 +16,8 @@ type IConfig interface {
 	GetIntValue(path ...string) (i int, err error)
 	// returns string value or error by path
 	GetStringValue(path ...string) (s string, err error)
+	// returns boolean value
+	GetBooleanValue(path ...string) (b bool, err error)
 	// returns config interface or nil + error
 	GetSubconfig(path ...string) (c IConfig, err error)
 }

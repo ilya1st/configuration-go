@@ -781,6 +781,128 @@ func TestHJSONConfig_GetStringValue(t *testing.T) {
 	}
 }
 
+func TestHJSONConfig_GetBooleanValue(t *testing.T) {
+	type fields struct {
+		filename string
+		hsonMap  map[string]interface{}
+	}
+	type args struct {
+		path []string
+	}
+	type teststruct struct {
+		name        string
+		fields      fields
+		args        args
+		wantB       bool
+		wantErr     bool
+		wantErrType string
+	}
+	tests := []teststruct{
+		teststruct{
+			name:   "no hash map yet",
+			fields: fields{filename: "", hsonMap: nil},
+			args: args{
+				path: []string{"somepath there"},
+			},
+			wantB:       false,
+			wantErr:     true,
+			wantErrType: "*configuration.ConfigUsageError",
+		},
+		teststruct{
+			name: "empty argument",
+			fields: fields{
+				filename: "",
+				hsonMap:  map[string]interface{}{"test field": interface{}("test text")},
+			},
+			args: args{
+				path: []string{},
+			},
+			wantB:       false,
+			wantErr:     true,
+			wantErrType: "*configuration.ConfigUsageError",
+		},
+		teststruct{
+			name: "correct path and lost item",
+			fields: fields{
+				filename: "",
+				hsonMap:  map[string]interface{}{"test field": interface{}("test text")},
+			},
+			args: args{
+				path: []string{"nothing"},
+			},
+			wantB:       false,
+			wantErr:     true,
+			wantErrType: "*configuration.ConfigItemNotFound",
+		},
+		teststruct{
+			name: "normal item extraction",
+			fields: fields{
+				filename: "",
+				hsonMap:  map[string]interface{}{"item1": interface{}(true)},
+			},
+			args: args{
+				path: []string{"item1"},
+			},
+			wantB:       true,
+			wantErr:     false,
+			wantErrType: "",
+		},
+		teststruct{
+			name: "recursive item extraction",
+			fields: fields{
+				filename: "",
+				hsonMap: map[string]interface{}{
+					"item1": map[string]interface{}{
+						"item2": interface{}(false),
+					},
+				},
+			},
+			args: args{
+				path: []string{"item1", "item2"},
+			},
+			wantB:       false,
+			wantErr:     false,
+			wantErrType: "",
+		},
+		teststruct{
+			name: "type mismatch recursive  case",
+			fields: fields{
+				filename: "",
+				hsonMap: map[string]interface{}{
+					"item1": map[string]interface{}{
+						"item2": interface{}(121212),
+					},
+				},
+			},
+			args: args{
+				path: []string{"item1", "item2"},
+			},
+			wantB:       false,
+			wantErr:     true,
+			wantErrType: "*configuration.ConfigTypeMismatchError",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			fl := &HJSONConfig{
+				filename: tt.fields.filename,
+				hsonMap:  tt.fields.hsonMap,
+			}
+			gotB, err := fl.GetBooleanValue(tt.args.path...)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("HJSONConfig.GetBooleanValue() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if (err != nil) && (reflect.TypeOf(err).String() == "*configuration.ConfigNotImplementedError") {
+				t.Errorf("HJSONConfig.GetStrinGetBooleanValue() error = %v, so this part of function is not correctly implemented yet", err)
+				return
+			}
+			if gotB != tt.wantB {
+				t.Errorf("HJSONConfig.GetBooleanValue() = %v, want %v", gotB, tt.wantB)
+			}
+		})
+	}
+}
 func TestHJSONConfig_GetSubconfig(t *testing.T) {
 	type fields struct {
 		filename string

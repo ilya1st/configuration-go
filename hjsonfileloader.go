@@ -154,6 +154,20 @@ func (fl *HJSONConfig) GetStringValue(path ...string) (s string, err error) {
 	}
 }
 
+// GetBooleanValue returns boolean value or error by path
+func (fl *HJSONConfig) GetBooleanValue(path ...string) (b bool, err error) {
+	i1, err1 := fl.GetValue(path...)
+	if nil != err1 {
+		return false, err1
+	}
+	switch v := i1.(type) {
+	case bool:
+		return v, nil
+	default:
+		return false, NewConfigTypeMismatchError("Wrong value type detected")
+	}
+}
+
 // GetSubconfig returns config interface or nil + error
 func (fl *HJSONConfig) GetSubconfig(path ...string) (c IConfig, err error) {
 	i1, err1 := fl.GetValue(path...)
