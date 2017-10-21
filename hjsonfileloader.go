@@ -188,7 +188,7 @@ func NewHJSONConfig(sl ...interface{}) (fl *HJSONConfig, err error) {
 	fl = &HJSONConfig{}
 	err = fl.SetDefaultLoadSetting(sl...)
 	if err != nil {
-		fl = nil
+		return nil, err
 	}
 	return
 }

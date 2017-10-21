@@ -1125,6 +1125,16 @@ func TestNewHJSONConfig(t *testing.T) {
 			checker:     nil,
 		},
 		teststruct{
+			name: "Wrong HJSON another variant delimiters",
+			args: args{
+				sl: []interface{}{[]byte(`{"test field":"test text"}, `)},
+			},
+			wantFl:      nil,
+			wantErr:     true,
+			wantErrType: "",
+			checker:     nil,
+		},
+		teststruct{
 			name: "Hashmap argument",
 			// must setup hash map for work and not fail
 			args: args{

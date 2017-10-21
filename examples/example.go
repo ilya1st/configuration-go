@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/Ilya1st/configuration-go"
+
+	"github.com/ilya1st/configuration-go"
 )
 
 func main() {
