@@ -81,7 +81,7 @@ func (e *ConfigItemNotFound) Error() string {
 	return e.str
 }
 
-// ConfigTypeMismatshErrochis intended for case we get value from object of wrong type
+// ConfigTypeMismatchError is intended for case we get value from object of wrong type
 type ConfigTypeMismatchError struct {
 	str string
 }
