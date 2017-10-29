@@ -132,9 +132,13 @@ func (fl *HJSONConfig) GetIntValue(path ...string) (i int, err error) {
 	if nil != err1 {
 		return 0, err1
 	}
+	// TODO: to mainbraich that
 	switch v := i1.(type) {
+	//TODO:add to mainbranch
+	case float64:
+		return int(v), nil
 	case int:
-		return v, nil
+		return int(v), nil
 	default:
 		return 0, NewConfigTypeMismatchError("Wrong value type detected")
 	}
