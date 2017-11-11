@@ -36,17 +36,17 @@ func init() {
 // How to call: GetConfigInstance(tag, format, list_of_settings...)
 // tag used not to load config twice. If you need reload them just use CheckExternalConfig() and ReloadInternalMap()
 // format: for now HJSON|hjson|JSON|json
-// this parameter added for future features(may be we woould add other configuration formats there)
+// this parameter added for future features(may be we would add other configuration formats there)
 // if it was loaded from file.
-// settings must contain config type as first argument and other perameners SetDefaultLoadSetting need
+// settings must contain config type as first argument and other parameters SetDefaultLoadSetting need
 // For example.
 // First call when we want load configuration file is:
-// GetConfigInstance("mainconfig", "HSON", "/etc/file.hjson")
+// GetConfigInstance("mainconfig", "HJSON", "/etc/file.hjson")
 // When you need get instance again, you just must call:
 // GetConfigInstance("mainconfig") and you will get them from internal hash
 // this all is intended not to put variable withyou configuration everywhere.
 // if you do not want tagging and every time get new object, use nil tag
-// e.g. GetConfigInstance(nil, "HSON", "/etc/file.hjson")
+// e.g. GetConfigInstance(nil, "HJSON", "/etc/file.hjson")
 func GetConfigInstance(settings ...interface{}) (config IConfig, err error) {
 	if len(settings) == 0 {
 		return nil, NewConfigUsageError("Wrong usage")
@@ -64,7 +64,7 @@ func GetConfigInstance(settings ...interface{}) (config IConfig, err error) {
 				hasTag = true
 				tag = v
 			default:
-				return nil, NewConfigUsageError("Tag argument must be nil or strig type")
+				return nil, NewConfigUsageError("Tag argument must be nil or string type")
 			}
 		}
 	}

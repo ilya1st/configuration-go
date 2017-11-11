@@ -15,7 +15,7 @@ func NewConfigNotImplementedError(s string) *ConfigNotImplementedError {
 	return &ConfigNotImplementedError{str: s}
 }
 
-// Error is standard error interface metod
+// Error is standard error interface method
 func (e *ConfigNotImplementedError) Error() string {
 	return e.str
 }
@@ -31,12 +31,12 @@ func NewConfigNotConfiguredError(s string) *ConfigNotConfiguredError {
 	return &ConfigNotConfiguredError{str: s}
 }
 
-// Error is standard error interface metod
+// Error is standard error interface h
 func (e *ConfigNotConfiguredError) Error() string {
 	return e.str
 }
 
-// HJSONConfigError inform when hson error occured there
+// HJSONConfigError inform when hjson error occurred there
 type HJSONConfigError struct {
 	str string
 }
@@ -46,7 +46,7 @@ func NewHJSONConfigError(s string) *HJSONConfigError {
 	return &HJSONConfigError{str: s}
 }
 
-// Error is standard error interface metod
+// Error is standard error interface h
 func (e *HJSONConfigError) Error() string {
 	return e.str
 }
@@ -61,7 +61,7 @@ func NewConfigUsageError(s string) *ConfigUsageError {
 	return &ConfigUsageError{str: s}
 }
 
-// Error is standard error interface metod
+// Error is standard error interface h
 func (e *ConfigUsageError) Error() string {
 	return e.str
 }
@@ -76,7 +76,7 @@ func NewConfigItemNotFound(s string) *ConfigItemNotFound {
 	return &ConfigItemNotFound{str: s}
 }
 
-// Error is standard error interface metod
+// Error is standard error interface h
 func (e *ConfigItemNotFound) Error() string {
 	return e.str
 }
@@ -91,7 +91,7 @@ func NewConfigTypeMismatchError(s string) *ConfigTypeMismatchError {
 	return &ConfigTypeMismatchError{str: s}
 }
 
-// Error is standard error interface metod
+// Error is standard error interface h
 func (e *ConfigTypeMismatchError) Error() string {
 	return e.str
 }

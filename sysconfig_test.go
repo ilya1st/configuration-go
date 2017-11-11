@@ -19,7 +19,7 @@ func TestGetConfigInstance(t *testing.T) {
 	}
 	tests := []teststruct{
 		teststruct{
-			name: "No arguments fuckup",
+			name: "No arguments fail",
 			args: args{
 				settings: []interface{}{},
 			},
@@ -31,7 +31,7 @@ func TestGetConfigInstance(t *testing.T) {
 		teststruct{
 			name: "nil first arg anf not existing config class second argument",
 			args: args{
-				settings: []interface{}{nil, "megapupernonexistingformat"},
+				settings: []interface{}{nil, "non_existing_format"},
 			},
 			wantConfig:  nil,
 			wantErr:     true,
@@ -51,11 +51,11 @@ func TestGetConfigInstance(t *testing.T) {
 		},
 		// here we just test that load works
 		teststruct{
-			name: "nil first, HJSON, correct second arg - hashmap. must get correcn HJSONFileLoader",
+			name: "nil first, HJSON, correct second arg - hashmap. must get correct HJSONFileLoader",
 			args: args{
 				settings: []interface{}{nil, "HJSON", map[string]interface{}{"test": "test"}},
 			},
-			wantConfig:  &HJSONConfig{filename: "", hsonMap: map[string]interface{}{"test": "test"}},
+			wantConfig:  &HJSONConfig{filename: "", hjsonMap: map[string]interface{}{"test": "test"}},
 			wantErr:     false,
 			wantErrType: "",
 			checker:     nil,
@@ -65,7 +65,7 @@ func TestGetConfigInstance(t *testing.T) {
 			args: args{
 				settings: []interface{}{"testtag", "HJSON", map[string]interface{}{"test": "test"}},
 			},
-			wantConfig:  &HJSONConfig{filename: "", hsonMap: map[string]interface{}{"test": "test"}},
+			wantConfig:  &HJSONConfig{filename: "", hjsonMap: map[string]interface{}{"test": "test"}},
 			wantErr:     false,
 			wantErrType: "",
 			checker: func(fl IConfig) bool {

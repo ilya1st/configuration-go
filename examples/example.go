@@ -9,7 +9,7 @@ import (
 func main() {
 	config, err := configuration.GetConfigInstance("mainconfig", "HJSON", "test.hjson")
 	if err != nil {
-		fmt.Printf("Error occured %v\n", err)
+		fmt.Printf("Error occurred %v\n", err)
 	}
 	val, err := config.GetValue("section1", "subsection2", "value")
 	fmt.Printf("getting section1/subsection2/value: val=%v, error=%v\n", val, err)
