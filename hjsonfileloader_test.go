@@ -24,7 +24,7 @@ func TestHJSONConfig_LoadFileContents(t *testing.T) {
 		wantErrType string
 	}
 	tests := []teststruct{
-		teststruct{
+		{
 			name:        "wrong file arg",
 			fields:      fields{filename: "", hjsonMap: nil},
 			args:        args{filename: ""},
@@ -32,7 +32,7 @@ func TestHJSONConfig_LoadFileContents(t *testing.T) {
 			wantErr:     true,
 			wantErrType: "*configuration.ConfigNotConfiguredError",
 		},
-		teststruct{
+		{
 			name:        "file reading error",
 			fields:      fields{filename: "", hjsonMap: nil},
 			args:        args{filename: "/hjson_not_existing_awful_filename"},
@@ -40,7 +40,7 @@ func TestHJSONConfig_LoadFileContents(t *testing.T) {
 			wantErr:     true,
 			wantErrType: "",
 		},
-		teststruct{
+		{
 			name:   "normal file open and read",
 			fields: fields{filename: "", hjsonMap: nil},
 			args:   args{filename: "./test.hjson"},
@@ -98,7 +98,7 @@ func TestHJSONConfig_ParseStringContents(t *testing.T) {
 		wantErrType string
 	}
 	tests := []teststruct{
-		teststruct{
+		{
 			name:   "Wrong broken hjson",
 			fields: fields{filename: "", hjsonMap: nil},
 			// broken hjson
@@ -107,7 +107,7 @@ func TestHJSONConfig_ParseStringContents(t *testing.T) {
 			wantErr:     true,
 			wantErrType: "",
 		},
-		teststruct{
+		{
 			name:   "Simple json",
 			fields: fields{filename: "", hjsonMap: nil},
 			// broken hjson
@@ -165,7 +165,7 @@ func TestHJSONConfig_SetDefaultLoadSetting(t *testing.T) {
 	}
 
 	tests := []teststruct{
-		teststruct{
+		{
 			name:   "No arguments",
 			fields: fields{},
 			args: args{
@@ -175,7 +175,7 @@ func TestHJSONConfig_SetDefaultLoadSetting(t *testing.T) {
 			wantErrType: "*configuration.HJSONConfigError",
 			checker:     nil,
 		},
-		teststruct{
+		{
 			name:   "nil argument",
 			fields: fields{},
 			args: args{
@@ -185,7 +185,7 @@ func TestHJSONConfig_SetDefaultLoadSetting(t *testing.T) {
 			wantErrType: "*configuration.HJSONConfigError",
 			checker:     nil,
 		},
-		teststruct{
+		{
 			name:   "wrong filename argument",
 			fields: fields{},
 			args: args{
@@ -196,7 +196,7 @@ func TestHJSONConfig_SetDefaultLoadSetting(t *testing.T) {
 			wantErrType: "*configuration.HJSONConfigError",
 			checker:     nil,
 		},
-		teststruct{
+		{
 			name:   "right filename argument",
 			fields: fields{},
 			args: args{
@@ -221,7 +221,7 @@ func TestHJSONConfig_SetDefaultLoadSetting(t *testing.T) {
 				return true
 			},
 		},
-		teststruct{
+		{
 			name:   "HJSON argument - try parse HJSON bytes",
 			fields: fields{},
 			args: args{
@@ -246,7 +246,7 @@ func TestHJSONConfig_SetDefaultLoadSetting(t *testing.T) {
 				return true
 			},
 		},
-		teststruct{
+		{
 			name:   "Wrong HJSON argument - try parse string",
 			fields: fields{},
 			args: args{
@@ -256,7 +256,7 @@ func TestHJSONConfig_SetDefaultLoadSetting(t *testing.T) {
 			wantErrType: "",
 			checker:     nil,
 		},
-		teststruct{
+		{
 			name: "Hashmap argument",
 			// must setup hash map for work and not fail
 			fields: fields{},
@@ -323,7 +323,7 @@ func TestHJSONConfig_CheckExternalConfig(t *testing.T) {
 		wantErrType string
 	}
 	tests := []teststruct{
-		teststruct{
+		{
 			name: "no such file found",
 			fields: fields{
 				filename: "test.hjson~~~~~~~~~~~~",
@@ -333,7 +333,7 @@ func TestHJSONConfig_CheckExternalConfig(t *testing.T) {
 			// yes here would go error from above functions
 			wantErrType: "*configuration.ConfigNotConfiguredError",
 		},
-		teststruct{
+		{
 			name: "Structure builded by hashmap",
 			fields: fields{
 				filename: "",
@@ -342,7 +342,7 @@ func TestHJSONConfig_CheckExternalConfig(t *testing.T) {
 			wantErr:     true,
 			wantErrType: "*configuration.ConfigUsageError",
 		},
-		teststruct{
+		{
 			name: "File exists and it is correct",
 			fields: fields{
 				filename: "test.hjson",
@@ -382,7 +382,7 @@ func TestHJSONConfig_ReloadInternalMap(t *testing.T) {
 		wantErrType string
 	}
 	tests := []teststruct{
-		teststruct{
+		{
 			name: "no such file found",
 			fields: fields{
 				filename: "test.hjson~~~~~~~~~~~~",
@@ -392,7 +392,7 @@ func TestHJSONConfig_ReloadInternalMap(t *testing.T) {
 			// yes here would go error from above functions
 			wantErrType: "*configuration.ConfigNotConfiguredError",
 		},
-		teststruct{
+		{
 			name: "Structure builded by hashmap",
 			fields: fields{
 				filename: "",
@@ -401,7 +401,7 @@ func TestHJSONConfig_ReloadInternalMap(t *testing.T) {
 			wantErr:     true,
 			wantErrType: "*configuration.ConfigUsageError",
 		},
-		teststruct{
+		{
 			name: "File exists and it is correct",
 			fields: fields{
 				filename: "test.hjson",
@@ -446,7 +446,7 @@ func TestHJSONConfig_GetValue(t *testing.T) {
 		wantErrType string
 	}
 	tests := []teststruct{
-		teststruct{
+		{
 			name:   "no hash map yet",
 			fields: fields{filename: "", hjsonMap: nil},
 			args: args{
@@ -456,7 +456,7 @@ func TestHJSONConfig_GetValue(t *testing.T) {
 			wantErr:     true,
 			wantErrType: "*configuration.ConfigUsageError",
 		},
-		teststruct{
+		{
 			name: "empty argument",
 			fields: fields{
 				filename: "",
@@ -469,7 +469,7 @@ func TestHJSONConfig_GetValue(t *testing.T) {
 			wantErr:     true,
 			wantErrType: "*configuration.ConfigUsageError",
 		},
-		teststruct{
+		{
 			name: "correct path and lost item",
 			fields: fields{
 				filename: "",
@@ -482,7 +482,7 @@ func TestHJSONConfig_GetValue(t *testing.T) {
 			wantErr:     true,
 			wantErrType: "*configuration.ConfigItemNotFound",
 		},
-		teststruct{
+		{
 			name: "normal item extraction",
 			fields: fields{
 				filename: "",
@@ -495,7 +495,7 @@ func TestHJSONConfig_GetValue(t *testing.T) {
 			wantErr:     false,
 			wantErrType: "",
 		},
-		teststruct{
+		{
 			name: "recursive item extraction",
 			fields: fields{
 				filename: "",
@@ -552,7 +552,7 @@ func TestHJSONConfig_GetIntValue(t *testing.T) {
 		wantErrType string
 	}
 	tests := []teststruct{
-		teststruct{
+		{
 			name:   "no hash map yet",
 			fields: fields{filename: "", hjsonMap: nil},
 			args: args{
@@ -562,7 +562,7 @@ func TestHJSONConfig_GetIntValue(t *testing.T) {
 			wantErr:     true,
 			wantErrType: "*configuration.ConfigUsageError",
 		},
-		teststruct{
+		{
 			name: "empty argument",
 			fields: fields{
 				filename: "",
@@ -575,7 +575,7 @@ func TestHJSONConfig_GetIntValue(t *testing.T) {
 			wantErr:     true,
 			wantErrType: "*configuration.ConfigUsageError",
 		},
-		teststruct{
+		{
 			name: "correct path and lost item",
 			fields: fields{
 				filename: "",
@@ -588,7 +588,7 @@ func TestHJSONConfig_GetIntValue(t *testing.T) {
 			wantErr:     true,
 			wantErrType: "*configuration.ConfigItemNotFound",
 		},
-		teststruct{
+		{
 			name: "normal item extraction",
 			fields: fields{
 				filename: "",
@@ -601,7 +601,7 @@ func TestHJSONConfig_GetIntValue(t *testing.T) {
 			wantErr:     false,
 			wantErrType: "",
 		},
-		teststruct{
+		{
 			name: "recursive item extraction",
 			fields: fields{
 				filename: "",
@@ -618,7 +618,7 @@ func TestHJSONConfig_GetIntValue(t *testing.T) {
 			wantErr:     false,
 			wantErrType: "",
 		},
-		teststruct{
+		{
 			name: "type mismatch recursive  case",
 			fields: fields{
 				filename: "",
@@ -675,7 +675,7 @@ func TestHJSONConfig_GetStringValue(t *testing.T) {
 		wantErrType string
 	}
 	tests := []teststruct{
-		teststruct{
+		{
 			name:   "no hash map yet",
 			fields: fields{filename: "", hjsonMap: nil},
 			args: args{
@@ -685,7 +685,7 @@ func TestHJSONConfig_GetStringValue(t *testing.T) {
 			wantErr:     true,
 			wantErrType: "*configuration.ConfigUsageError",
 		},
-		teststruct{
+		{
 			name: "empty argument",
 			fields: fields{
 				filename: "",
@@ -698,7 +698,7 @@ func TestHJSONConfig_GetStringValue(t *testing.T) {
 			wantErr:     true,
 			wantErrType: "*configuration.ConfigUsageError",
 		},
-		teststruct{
+		{
 			name: "correct path and lost item",
 			fields: fields{
 				filename: "",
@@ -711,7 +711,7 @@ func TestHJSONConfig_GetStringValue(t *testing.T) {
 			wantErr:     true,
 			wantErrType: "*configuration.ConfigItemNotFound",
 		},
-		teststruct{
+		{
 			name: "normal item extraction",
 			fields: fields{
 				filename: "",
@@ -724,7 +724,7 @@ func TestHJSONConfig_GetStringValue(t *testing.T) {
 			wantErr:     false,
 			wantErrType: "",
 		},
-		teststruct{
+		{
 			name: "recursive item extraction",
 			fields: fields{
 				filename: "",
@@ -741,7 +741,7 @@ func TestHJSONConfig_GetStringValue(t *testing.T) {
 			wantErr:     false,
 			wantErrType: "",
 		},
-		teststruct{
+		{
 			name: "type mismatch recursive  case",
 			fields: fields{
 				filename: "",
@@ -798,7 +798,7 @@ func TestHJSONConfig_GetBooleanValue(t *testing.T) {
 		wantErrType string
 	}
 	tests := []teststruct{
-		teststruct{
+		{
 			name:   "no hash map yet",
 			fields: fields{filename: "", hjsonMap: nil},
 			args: args{
@@ -808,7 +808,7 @@ func TestHJSONConfig_GetBooleanValue(t *testing.T) {
 			wantErr:     true,
 			wantErrType: "*configuration.ConfigUsageError",
 		},
-		teststruct{
+		{
 			name: "empty argument",
 			fields: fields{
 				filename: "",
@@ -821,7 +821,7 @@ func TestHJSONConfig_GetBooleanValue(t *testing.T) {
 			wantErr:     true,
 			wantErrType: "*configuration.ConfigUsageError",
 		},
-		teststruct{
+		{
 			name: "correct path and lost item",
 			fields: fields{
 				filename: "",
@@ -834,7 +834,7 @@ func TestHJSONConfig_GetBooleanValue(t *testing.T) {
 			wantErr:     true,
 			wantErrType: "*configuration.ConfigItemNotFound",
 		},
-		teststruct{
+		{
 			name: "normal item extraction",
 			fields: fields{
 				filename: "",
@@ -847,7 +847,7 @@ func TestHJSONConfig_GetBooleanValue(t *testing.T) {
 			wantErr:     false,
 			wantErrType: "",
 		},
-		teststruct{
+		{
 			name: "recursive item extraction",
 			fields: fields{
 				filename: "",
@@ -864,7 +864,7 @@ func TestHJSONConfig_GetBooleanValue(t *testing.T) {
 			wantErr:     false,
 			wantErrType: "",
 		},
-		teststruct{
+		{
 			name: "type mismatch recursive  case",
 			fields: fields{
 				filename: "",
@@ -922,7 +922,7 @@ func TestHJSONConfig_GetSubconfig(t *testing.T) {
 	tests := []teststruct{
 
 		// TODO: Add test cases.
-		teststruct{
+		{
 			name:   "no hash map yet",
 			fields: fields{filename: "", hjsonMap: nil},
 			args: args{
@@ -932,7 +932,7 @@ func TestHJSONConfig_GetSubconfig(t *testing.T) {
 			wantErr:     true,
 			wantErrType: "*configuration.ConfigUsageError",
 		},
-		teststruct{
+		{
 			name: "empty argument",
 			fields: fields{
 				filename: "",
@@ -945,7 +945,7 @@ func TestHJSONConfig_GetSubconfig(t *testing.T) {
 			wantErr:     true,
 			wantErrType: "*configuration.ConfigUsageError",
 		},
-		teststruct{
+		{
 			name: "correct path and lost item",
 			fields: fields{
 				filename: "",
@@ -958,7 +958,7 @@ func TestHJSONConfig_GetSubconfig(t *testing.T) {
 			wantErr:     true,
 			wantErrType: "*configuration.ConfigItemNotFound",
 		},
-		teststruct{
+		{
 			name: "normal item extraction with type mismatch",
 			fields: fields{
 				filename: "",
@@ -971,7 +971,7 @@ func TestHJSONConfig_GetSubconfig(t *testing.T) {
 			wantErr:     true,
 			wantErrType: "*configuration.ConfigTypeMismatchError",
 		},
-		teststruct{
+		{
 			name: "normal item extraction with type mismatch",
 			fields: fields{
 				filename: "",
@@ -986,7 +986,7 @@ func TestHJSONConfig_GetSubconfig(t *testing.T) {
 			wantErr:     false,
 			wantErrType: "",
 		},
-		teststruct{
+		{
 			name: "recursive item extraction",
 			fields: fields{
 				filename: "",
@@ -1003,7 +1003,7 @@ func TestHJSONConfig_GetSubconfig(t *testing.T) {
 			wantErr:     false,
 			wantErrType: "",
 		},
-		teststruct{
+		{
 			name: "type mismatch recursive  case",
 			fields: fields{
 				filename: "",
@@ -1057,7 +1057,7 @@ func TestNewHJSONConfig(t *testing.T) {
 		checker     checkerfunc
 	}
 	tests := []teststruct{
-		teststruct{
+		{
 			name: "No arguments",
 			args: args{
 				sl: []interface{}{},
@@ -1067,7 +1067,7 @@ func TestNewHJSONConfig(t *testing.T) {
 			wantErrType: "*configuration.HJSONConfigError",
 			checker:     nil,
 		},
-		teststruct{
+		{
 			name: "nil argument",
 			args: args{
 				sl: []interface{}{nil},
@@ -1077,7 +1077,7 @@ func TestNewHJSONConfig(t *testing.T) {
 			wantErrType: "*configuration.HJSONConfigError",
 			checker:     nil,
 		},
-		teststruct{
+		{
 			name: "wrong filename argument",
 			args: args{
 				// compromised not existing filename
@@ -1088,7 +1088,7 @@ func TestNewHJSONConfig(t *testing.T) {
 			wantErrType: "*configuration.HJSONConfigError",
 			checker:     nil,
 		},
-		teststruct{
+		{
 			name: "right filename argument",
 			args: args{
 				sl: []interface{}{"test.hjson"},
@@ -1101,7 +1101,7 @@ func TestNewHJSONConfig(t *testing.T) {
 			wantErrType: "",
 			checker:     nil,
 		},
-		teststruct{
+		{
 			name: "HJSON argument - try parse HJSON bytes",
 			args: args{
 				sl: []interface{}{[]byte(`{"test field":"test text"}`)},
@@ -1114,7 +1114,7 @@ func TestNewHJSONConfig(t *testing.T) {
 			wantErrType: "",
 			checker:     nil,
 		},
-		teststruct{
+		{
 			name: "Wrong HJSON argument - try parse string",
 			args: args{
 				sl: []interface{}{[]byte(`{"test field":"test text"`)},
@@ -1124,7 +1124,7 @@ func TestNewHJSONConfig(t *testing.T) {
 			wantErrType: "",
 			checker:     nil,
 		},
-		teststruct{
+		{
 			name: "Wrong HJSON another variant delimiters",
 			args: args{
 				sl: []interface{}{[]byte(`{"test field":"test text"}, `)},
@@ -1134,7 +1134,7 @@ func TestNewHJSONConfig(t *testing.T) {
 			wantErrType: "",
 			checker:     nil,
 		},
-		teststruct{
+		{
 			name: "Hashmap argument",
 			// must setup hash map for work and not fail
 			args: args{

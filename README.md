@@ -1,5 +1,7 @@
 # configuration-go
 
+[![Build Status](https://travis-ci.org/ilya1st/configuration-go.svg?branch=master)](https://travis-ci.org/ilya1st/configuration-go)[![Go Report Card](https://goreportcard.com/badge/github.com/ilya1st/configuration-go)](https://goreportcard.com/report/github.com/ilya1st/configuration-go)
+
 The configuration-go package intended for normal work with configuration files.
 For now we support HJSON format three-like configs.
 Library is intended to ease getting configuration file values if you know path to them
