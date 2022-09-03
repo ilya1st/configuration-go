@@ -1,6 +1,8 @@
 language: go
-go: 1.9.2
+go: 1.19
 script: 
+  - go mod init github.com/ilya1st/configuration-go
+  - go mod tidy
   - go get -u 
   - go test -race
 sudo: false
